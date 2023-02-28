@@ -1,1 +1,1 @@
-# MATH-318-Final-Project-Trash-Classification-
+# MATH-318-Final-Project
