@@ -1,0 +1,20 @@
+---
+title: "Challenge 2: Traditional Learning Methods"
+author: "Luke Ingram, Sahil Gill" 
+subtitle: "MATH 318 - Winter 2023"
+output: html_notebook
+---
+
+## Section 1 - Choosing our Angle
+
+TODO, summary stats & choosing a trad-ML approach based on the summary
+
+# 
+
+NOTE: the next two sections are probable cases, we will choose the approach based on our analysis of our extracted feature set.
+
+## Section 2 - The Naïve Approach
+
+#TODO: naive bayes
+
+## Section 3 - KNN  

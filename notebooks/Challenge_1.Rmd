@@ -1,5 +1,18 @@
 ---
 title: "Challenge 1: Finding our Feature Space"
 author: "Sahil Gill, Luke Ingram"
+subtitle: "MATH 318 - Winter 2023"
 output: html_notebook
 ---
+
+## Section 1 - Introduction
+
+### The Dataset: 
+
+```{python}
+#TODO DISPLAY 6-8 SAMPLE IMAGES FROM THE DATASET
+```
+
+##  
+
+## Section 2 - Extracting Information from Images
