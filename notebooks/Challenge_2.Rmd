@@ -17,4 +17,10 @@ NOTE: the next two sections are probable cases, we will choose the approach base
 
 #TODO: naive bayes
 
-## Section 3 - KNN  
+## Section 3 - LDA, QDA
+
+Maybe LDA or
+
+## Section 3 - KNN
+
+TODO: cross-validated KNN & then cross validated PCA with knn

@@ -5,15 +5,15 @@ subtitle: "MATH 318 - Winter 2023"
 output: html_notebook
 ---
 
-## Section  1 - Why Neural Nets? 
+## Section 1 - Why Neural Nets?
 
 TODO
 
-## Section 2 - The Architecture 
+## Section 2 - The Architecture
 
 TODO
 
-## Section 3 - VGG16 in Action 
+## Section 3 - VGG16 in Action
 
 TODO
 
