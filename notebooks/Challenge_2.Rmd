@@ -5,13 +5,11 @@ subtitle: "MATH 318 - Winter 2023"
 output: html_notebook
 ---
 
-## Section 1 - Choosing our Angle
+## Section 1 - Loading our Data
 
-TODO, summary stats & choosing a trad-ML approach based on the summary
-
-# 
-
-NOTE: the next two sections are probable cases, we will choose the approach based on our analysis of our extracted feature set.
+```{r}
+#TODO load raw pixels & 3 csv's of keypoints from last challenge
+```
 
 ## Section 2 - The Naïve Approach
 
@@ -19,7 +17,7 @@ NOTE: the next two sections are probable cases, we will choose the approach base
 
 ## Section 3 - LDA, QDA
 
-Maybe LDA or
+Maybe LDA or QDA
 
 ## Section 3 - KNN
 
