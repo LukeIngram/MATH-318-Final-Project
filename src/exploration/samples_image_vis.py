@@ -1,3 +1,4 @@
+# samples_image_vis.py
 # Image Visualization for Challenge_1 notebooks section 1
 
 import matplotlib.pyplot as plt

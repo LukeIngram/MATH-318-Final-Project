@@ -1,5 +1,5 @@
 ---
-title: "Challenge 2: Traditional Learning Methods"
+title: "Challenge 2: Tradional Learning Methods"
 author: "Luke Ingram, Sahil Gill" 
 subtitle: "MATH 318 - Winter 2023"
 output: html_notebook
@@ -8,17 +8,15 @@ output: html_notebook
 ## Section 1 - Loading our Data
 
 ```{r}
-#TODO load raw pixels & 3 csv's of keypoints from last challenge
+#TODO load csv's of raw pixels & keypoints from last challenge
 ```
 
-## Section 2 - The Naïve Approach
+## Section 3 - The Naïve Approach
 
-#TODO: naive bayes
+TODO: Naive Bayes
 
-## Section 3 - LDA, QDA
-
-Maybe LDA or QDA
-
-## Section 3 - KNN
+## Section 2 - KNN
 
 TODO: cross-validated KNN & then cross validated PCA with knn
+
+## 

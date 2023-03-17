@@ -80,7 +80,7 @@ We may perform dimensional reduction methods such as PCA to reduce this number. 
 
 # Load dataset
 imgPaths = glob.glob("../src/data/archive/Garbage_classification/load/*.jpg")
-X_raw = np.array([np.array(cv2.imread(img)) for img in random.choices(imgPaths,k=1000])
+X_raw = np.array([np.array(cv2.imread(img)) for img in random.choices(imgPaths,k=1000)])
 X_data = X_raw.flatten().reshape(1000,589824) # flatten & reshape to retain features
 
 # Reduce down to 95% explained variance
