@@ -28,7 +28,7 @@ import random
 
 We'll be using the **Garbage Classification** dasaset linked here: <https://www.kaggle.com/datasets/asdasdasasdas/garbage-classification>
 
-This is a supervised learning dataset contains 2527 images belonging to six classes. Cardboard (393), glass (491), metal (400), paper(584), plastic (472) and trash(127).
+This is a supervised learning dataset, which contains 2527 images belonging to six classes. Cardboard (393), glass (491), metal (400), paper (584), plastic (472) and trash (127).
 
 Here's a sample image from each class:
 
@@ -53,8 +53,8 @@ samples = [
 fig,axes = plt.subplots(2,3,subplot_kw={'xticks':(),'yticks':()})
 
 for sample,ax,fname in zip(samples,axes.flatten(),fnames):
-    ax.imshow(cv2.cvtColor(sample, cv2.COLOR_BGR2RGB))
-    ax.set_title(fname)
+    _ = ax.imshow(cv2.cvtColor(sample, cv2.COLOR_BGR2RGB))
+    _ = ax.set_title(fname)
 
 plt.show()
 ```
@@ -104,7 +104,7 @@ kp_samples = [
 # Display keypoints found with SIFT
 fig,axes = plt.subplots(1,2,subplot_kw={'xticks':(),'yticks':()})
 for sample,ax in zip(kp_samples,axes.flatten()):
-    ax.imshow(cv2.cvtColor(sample, cv2.COLOR_BGR2RGB))
+    _ = ax.imshow(cv2.cvtColor(sample, cv2.COLOR_BGR2RGB))
 
 plt.show()
 ```

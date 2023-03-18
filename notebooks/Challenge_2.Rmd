@@ -16,6 +16,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import LabelEncoder,MinMaxScaler
 from sklearn.metrics import confusion_matrix, classification_report
 import matplotlib.pyplot as plt 
+import pandas as pd
 import numpy as np 
 import cv2
 import glob
@@ -25,10 +26,22 @@ import random
 ## Section 1 - Loading the Data
 
 ```{python}
+dirName = "../src/data/archive/zero-indexed-files.txt"
+imgPath = "../src/data/archive/Garage_classification/load/"
 
-#TODO load 
+df_raw = pd.read_csv(dirName,sep=' ')
+df_raw['image'] = imgPath + df_raw['image'].astype(str)
 
+plt.clf()
+plt.rc('axes', axisbelow=True)
+plt.grid(linestyle='dotted')
+temp = plt.bar(list(range(6)),
+                np.unique(df_raw['class'],return_counts=True)[1])
+_ = plt.title("Distribution of Classes in Raw Dataset")
+_ = plt.xlabel("Class")
+_ = plt.ylabel("Count")
 
+plt.show()
 ```
 
 In our dataset the class labels are assigned as follows:
@@ -40,26 +53,27 @@ In our dataset the class labels are assigned as follows:
 4.  Metal
 5.  Trash
 
-Above, We've SIFTed our data & prepared a dataframe, which gives us rows containing arrays of SIFT keypoint objects. These keypoint objects efficently encode both the keypoints and image descriptors. However, if we are to use KNN, we must transform our data into a discrete set of features whose entries can be evaluated with a distance metric.
+Above, we've prepared a dataframe containing filepaths and their respective classes. Now we need to extract our design matrix.
 
-## Section 2 - Data Quantization 
+Previously, we introduced SIFT, an algorithm for keypoint and image descriptor generation. The algorithm outputs a keypoint object, a datatype that efficiently encodes both the keypoints and image descriptors for each image. However, if we use KNN, we must transform our data into a discrete set of features whose entries can be evaluated with a distance metric.
+
+## Section 2 - Data Quantization
 
 The process of generating said feature space involves three steps.
 
-1.  Clustering: TODO: description
-2.  Discretization: TODO: description
-3.  Normalization: TODO: description
-4.  Binning: TODO: description
+1.  Extracting Keypoints & Descriptors: SIFT Algorithm covered in the last Challenge
+2.  Clustering (Feature Reduction): TODO: description
+3.  Normalization & Discretization: TODO: description
 
-### Section 2.1 - K-means Clustering
+### Section 2.1 - K-Means Clustering
 
-TODO: cross-validated KNN & then cross validated PCA with knn
+TODO: Introduct K-Means clustering
 
-### Section 2.2 - Bag of Visual Words 
+TODO: Introduce Elbow-Method
 
 TODO bag of visual words quantitization
 
-### Section 2.3 - Normalization & Image Histograms 
+### Section 2.3 - Normalization & Discretization
 
 TODO Image histograms & normalization
 
@@ -69,9 +83,13 @@ Now, we classify:
 
 TODO
 
+### Section 3.1 - K-Fold Cross Validation
+
 ```{python}
 
 ```
+
+### Section 3.2 - Classifying with Optimized K
 
 ## Section 4 - Raw Pixels
 
