@@ -1,22 +1,78 @@
 ---
-title: "Challenge 2: Tradional Learning Methods"
+title: "Challenge 2: K-Nearest-Neighbors"
 author: "Luke Ingram, Sahil Gill" 
 subtitle: "MATH 318 - Winter 2023"
 output: html_notebook
 ---
 
-## Section 1 - Loading our Data
-
 ```{r}
-#TODO load csv's of raw pixels & keypoints from last challenge
+library("reticulate")
+Sys.setenv(RETICULATE_PYTHON = "../venv/bin/python3") # Set python env
 ```
 
-## Section 3 - The Naïve Approach
+```{python}
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import LabelEncoder,MinMaxScaler
+from sklearn.metrics import confusion_matrix, classification_report
+import matplotlib.pyplot as plt 
+import numpy as np 
+import cv2
+import glob
+import random
+```
 
-TODO: Naive Bayes
+## Section 1 - Loading the Data
 
-## Section 2 - KNN
+```{python}
+
+#TODO load 
+
+
+```
+
+In our dataset the class labels are assigned as follows:
+
+0.  Glass
+1.  Paper
+2.  Cardboard
+3.  Plastic
+4.  Metal
+5.  Trash
+
+Above, We've SIFTed our data & prepared a dataframe, which gives us rows containing arrays of SIFT keypoint objects. These keypoint objects efficently encode both the keypoints and image descriptors. However, if we are to use KNN, we must transform our data into a discrete set of features whose entries can be evaluated with a distance metric.
+
+## Section 2 - Data Quantization 
+
+The process of generating said feature space involves three steps.
+
+1.  Clustering: TODO: description
+2.  Discretization: TODO: description
+3.  Normalization: TODO: description
+4.  Binning: TODO: description
+
+### Section 2.1 - K-means Clustering
 
 TODO: cross-validated KNN & then cross validated PCA with knn
 
-## 
+### Section 2.2 - Bag of Visual Words 
+
+TODO bag of visual words quantitization
+
+### Section 2.3 - Normalization & Image Histograms 
+
+TODO Image histograms & normalization
+
+## Section 3 - KNN Classification
+
+Now, we classify:
+
+TODO
+
+```{python}
+
+```
+
+## Section 4 - Raw Pixels
+
+TODO: REVISIT THE RAW PIXEL APPROACH & COMPARE TO ABOVE

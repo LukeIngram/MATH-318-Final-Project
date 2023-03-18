@@ -1,5 +1,5 @@
 ---
-title: 'Challenge 1: Finding our Feature Space'
+title: 'Challenge 1: Finding our Angle'
 author: "Sahil Gill, Luke Ingram"
 subtitle: "MATH 318 - Winter 2023"
 output:
@@ -65,35 +65,15 @@ But we've got all these images, where do we start?
 
 ## Section 2 - Extracting Information from Images
 
-Before we make any predictions, we need to understand how we obtain real-valued information from our images. There are a number of approaches we can take:
+Before we make any predictions, we need to understand how we obtain real-valued information from our images.
 
-### Section 2.1 - Raw Pixel Data
+## Section 2.1 - Raw Pixel Data
 
 If you've ever played around with the MNIST handwritten digit recognition dataset, or watched some introductory videos about computer vision, then an intuitively simple approach would be to enumerate all of the pixel data into a massive array.
 
 Since all the images in our dataset are 512x384, converting all our images to grayscale yields a feature space of 196608. Now if we consider our three color channels, our space would grow to a monstrous 589824 features.
 
-We may perform dimensional reduction methods such as PCA to reduce this number. For example, taking a 1000-sample subset of our training data.
-
-```{python}
-# NOTE: DO NOT RUN OUTSIDE OF HEAVY COMPUTE ENVIRONMENT
-
-# Load dataset
-imgPaths = glob.glob("../src/data/archive/Garbage_classification/load/*.jpg")
-X_raw = np.array([np.array(cv2.imread(img)) for img in random.choices(imgPaths,k=1000)])
-X_data = X_raw.flatten().reshape(1000,589824) # flatten & reshape to retain features
-
-# Reduce down to 95% explained variance
-scaler = MinMaxScaler()
-#X_scaled = scaler.fit_transform(X_data) #<--- uncommnet to run
-pca = PCA(n_components = 0.95) # n_components < 1 converts to pc's needed for that expl. var.
-#pca.fit(X_scaled) #<------ uncommnet to run 
-#X_reduced = pca.transform(X_scaled) #<------ uncommnet to run x
-
-print(f"Dimensions of data after PCA: {X_reduced.shape}")
-```
-
-With PCA, we were able to reduce our dimensions to only \_\_! All while retaining 95% of our explained variance!
+We may perform dimensionality reduction methods such as PCA to reduce this number. Although, these computations will prove to be both time and memory intensive.
 
 Evaluation of the Raw Pixel Data method is to come, but first we explore a more sophisticated approach.
 
@@ -105,31 +85,34 @@ TODO gentile introduction to keypoints in images (hopefully using examples
 
 How do we obtain these keypoints?
 
-### Section 2.3 - SIFT, SURF, & FAST
-
-TODO: what is a feature descriptor?
-
-**SIFT (Scale Invariant Feature Transform)**:
+### Section 2.3 - The SIFT **(Scale Invariant Feature Transform)** Algorithm
 
 TODO (EXPLANATION)
 
-```{python}
-#TODO FIND KEYPOINTS AND SAVE THEM TO CSV (easier transition to R)
-
-```
-
-**SURF (Speeded-Up Robust Features):**
-
-TODO (EXPLANATION)
+We'll use opencv to generate our keypoints.
 
 ```{python}
-#TODO FIND KEYPOINTS AND SAVE THEM TO CSV (easier transition to R)
+# Take Samples from section 1 
+sift = cv2.SIFT_create()
+kp_samples = [
+  cv2.drawKeypoints(samples[1],sift.detect(samples[1]),samples[1],
+          flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS),
+  cv2.drawKeypoints(samples[2],sift.detect(samples[2]),samples[2],
+          flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+  ]
+
+# Display keypoints found with SIFT
+fig,axes = plt.subplots(1,2,subplot_kw={'xticks':(),'yticks':()})
+for sample,ax in zip(kp_samples,axes.flatten()):
+    ax.imshow(cv2.cvtColor(sample, cv2.COLOR_BGR2RGB))
+
+plt.show()
 ```
 
-**FAST (Features from Accelerated Segment Test):**
-
-TODO (EXPLANATION)
+TODO DESCRIPTORS
 
 ```{python}
-#TODO FIND KEYPOINTS AND SAVE THEM TO CSV (easier transition to R)
+# GET IMAGE DESCRIPTORS  
 ```
+
+#TODO elaborate on the keypoints in the image
