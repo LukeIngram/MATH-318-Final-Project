@@ -79,15 +79,39 @@ Evaluation of the Raw Pixel Data method is to come, but first we explore a more 
 
 ### Section 2.2 - Keypoints
 
-TODO gentile introduction to keypoints in images (hopefully using examples
+~~TODO gentile introduction to keypoints in images (hopefully using examples~~
 
-...
+If you were on a beach staring into the ocean, would you really look at every crease of every wave that comes towards you? When you look at a rather uneventful photo of a forest, what do you look at? It is far too complex and unnecessary for our brains to process every piece of information that is fed to our eyes.
 
-How do we obtain these keypoints?
+Human eyes have become keen to "anomalies" in whatever scene you might be observing, be it some sailboat out in a body of water or a house in the woods. In a scene of constant, unchanging information, our eyes are more likely to notice things that are extreme relative to the rest of the scene. In computer vision, these extrema in images are referred to as **keypoints**.
+
+![](images/image-1633028732.png)
+
+Obtaining keypoints is quite expensive and convoluted. To do so, a mathematical technique called *convolutions* are required, where a "window of values" is slowly moved over every portion of an image. This window of values, also called a kernel, is dotted with whatever portion of an image the kernel was over. Using this convolution technique, we can blur images using a *Gaussian Kernel* and take the difference of this blurred version with the previous (unblurred) version of the image.
+
+Using these difference images, we can find extrema, which are defined as keypoints. However, because of the blurs induced on the image, we may need to look at a subsampled image to find keypoints that we might have missed by looking at the scene too broadly.
+
+![](images/image-607433071.png)
+
+We obtain a "pyramid" of difference images. Every time the image is subsampled, we add a layer, or an *octave* to the pyramid.
+
+Here's the intuition: blurring an image required context. We couldn't look at a single pixel in an image and determine how to blur it. We need contextual information of the pixels that surround each pixel in order to blur convincingly. This context (reflected in the difference images), allows us to essentially tone down every "uninformative pixel", and highlight the extreme pixels--the keypoints.
+
+~~How do we obtain these keypoints?~~
 
 ### Section 2.3 - The SIFT **(Scale Invariant Feature Transform)** Algorithm
 
-TODO (EXPLANATION)
+~~TODO (EXPLANATION)~~
+
+Keypoints are critical for representing images without extraneous, uninteresting information. However, keypoints cannot contain perfect information about the entirety of an image. The authors who introduced their concepts of keypoints created an extension of said keypoints: the **Scale Invariant Feature Transform**, or **SIFT**.
+
+The **SIFT** framework essentially computes a $16 \times 16$ region around every keypoint that was computed using the algorithm in the previous section. Given this window around the keypoint, SIFT breaks down the window into $4\times4$ sub-windows.
+
+![](images/image-1364412822.png)
+
+For every one of these sub-windows, we compute a histogram where there are 8 bins of angle ranges. The gradient of every pixel in this subwindow is added to the respective bin with the gradient's corresponding angle, encoding even more information about directional changes in an image.
+
+![](images/image-2039732114.png)
 
 We'll use opencv to generate our keypoints.
 
