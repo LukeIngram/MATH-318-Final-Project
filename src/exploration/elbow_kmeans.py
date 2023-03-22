@@ -4,6 +4,7 @@
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt 
 import numpy as np 
+from tqdm import tqdm 
 
 
 
@@ -13,7 +14,9 @@ def elbow_kmeans(data):
     dist = []
     K = []
 
-    for k in range(1,60,5): #Minimum is number of classes
+    data_long = data.ravel().reshape(-1,1)
+
+    for k in tqdm(range(1,60,5)): #Minimum is number of classes
         kmeans = KMeans(n_clusters=k,random_state=0)
         kmeans.fit(data)
         dist.append(kmeans.inertia_)

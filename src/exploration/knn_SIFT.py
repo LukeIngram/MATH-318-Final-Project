@@ -7,6 +7,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import confusion_matrix,classification_report
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt 
+from elbow_kmeans import elbow_kmeans
 from tqdm import tqdm 
 import numpy as np 
 import pandas as pd
@@ -15,17 +16,15 @@ import glob
 
 
 # SIFT obtains & returns image descriptors
-def SIFT(imgs): 
+def SIFT(img): 
     sift = cv2.SIFT_create() 
     descriptors = []
-    keypoints = []
 
-    for img in imgs: 
-        kps,des = sift.detectAndCompute(img,None)
-        descriptors.append(des)
-        keypoints.append(kps)
-
-    return keypoints,descriptors
+    kps,des = sift.detectAndCompute(img,None)
+    for d in des:
+        descriptors.append(d)
+    
+    return kps,descriptors
     
 
 # Using K-Means clustering for feature reduction. 
@@ -60,18 +59,30 @@ def evaluate(scores):
 def main():
     # Load data 
     dirName = "data/archive/zero-indexed-files.txt"
-    imgPath = "data/archive/Garage_classification/load/"
+    imgPath = "data/archive/Garbage_classification/load/"
 
-    df_raw = pd.read_csv(dirName,sep=' ')
+    df = pd.read_csv(dirName,sep=' ')
    
-    df_raw['image'] = imgPath + df_raw['image'].astype(str)
-   
+    df['image'] = imgPath + df['image'].astype(str)
+    df['image'] = df['image'].apply(lambda x: cv2.imread(x))
 
-    print(df_raw.head()) #DEBUG
+    print(df.head()) #DEBUG
+    
+    train_X,test_X,train_Y,test_Y = train_test_split(df['image'],df['class'],
+                                                     test_size=0.33,random_state=0)
+
+    for sample in train_X: 
+        kps,des = SIFT()
+
+
+    # find optimal clustering
+    elbow_kmeans(desc_train)
+
+    # Bin data with clustering 
+    
+    
 
     #TODO:
-    # convert df image column to opencv.imread
-    # compute keypoints 
     # find optimal clusters K 
     # bin all data with clustering
     # cross-validated KNN 
@@ -79,7 +90,7 @@ def main():
    
    #knn = KNeighborsClassifier()
     
-    #pass #TODO 
+    #pass #TODO
     
 
 if __name__ == '__main__':
