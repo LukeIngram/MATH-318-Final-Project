@@ -18,13 +18,9 @@ import glob
 # SIFT obtains & returns image descriptors
 def SIFT(img): 
     sift = cv2.SIFT_create() 
-    descriptors = []
-
     kps,des = sift.detectAndCompute(img,None)
-    for d in des:
-        descriptors.append(d)
     
-    return kps,descriptors
+    return kps if kps is not None else [],des if des is not None else []
     
 
 # Using K-Means clustering for feature reduction. 
@@ -71,12 +67,21 @@ def main():
     train_X,test_X,train_Y,test_Y = train_test_split(df['image'],df['class'],
                                                      test_size=0.33,random_state=0)
 
-    for sample in train_X: 
-        kps,des = SIFT()
+    print(df.tail(1))
 
+    train_des= []
+
+    print(train_X[:-1])
+
+    # load & cluster
+    for sample in train_X: 
+        kps,des = SIFT(sample)
+        #print(des)
+        for d in des:
+            train_des.append(d)
 
     # find optimal clustering
-    elbow_kmeans(desc_train)
+    elbow_kmeans(train_des)
 
     # Bin data with clustering 
     

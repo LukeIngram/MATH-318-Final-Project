@@ -14,7 +14,7 @@ def elbow_kmeans(data):
     dist = []
     K = []
 
-    data_long = data.ravel().reshape(-1,1)
+    #data_long = data.ravel().reshape(-1,1)
 
     for k in tqdm(range(1,60,5)): #Minimum is number of classes
         kmeans = KMeans(n_clusters=k,random_state=0)
