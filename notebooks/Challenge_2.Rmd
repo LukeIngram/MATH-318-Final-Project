@@ -23,7 +23,7 @@ import glob
 import random
 ```
 
-## Section 1 - Loading the Data
+## Section 1 - Loading the Data 
 
 ```{python}
 dirName = "../src/data/archive/zero-indexed-files.txt"
