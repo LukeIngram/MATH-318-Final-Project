@@ -18,7 +18,7 @@ import glob
 # SIFT obtains & returns image descriptors
 def SIFT(img):
     # normalize
-    norm = cv2.normalize(img,np.zeros(img.shape), 0, 255, cv2.NORM_MINMAX)
+    norm = cv2.normalize(img,np.zeros(img.shape), 0, 255, cv2.NORM_MINMAX) # CAUSE OF ERROR?
     sift = cv2.SIFT_create() 
     kps,des = sift.detectAndCompute(norm,None) #FIX: OUTPUTS NULLS
     if (len(kps) < 1): 
@@ -93,7 +93,7 @@ def main():
             train_des.append(d)
 
     # find optimal clustering
-    elbow_kmeans(train_des,kmax=60)
+    #elbow_kmeans(train_des,kmax=60)
 
     # cluster data with said optimal value (from elbow)
     kmeans = cluster(train_des,k = 60)

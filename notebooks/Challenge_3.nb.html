@@ -1771,21 +1771,67 @@ Networks</h1>
 <p>Before we begin, we need to load &amp; normalize our data.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgcHl0aG9uXG4jTG9hZCBkYXRhIFxuZGlyTmFtZSA9IFwiLi4vc3JjL2RhdGEvYXJjaGl2ZS96ZXJvLWluZGV4ZWQtZmlsZXMudHh0XCJcbmltZ1BhdGggPSBcIi4uL3NyYy9kYXRhL2FyY2hpdmUvR2FyYmFnZV9jbGFzc2lmaWNhdGlvbi9sb2FkL1wiXG5cbmRmID0gcGQucmVhZF9jc3YoZGlyTmFtZSxzZXA9JyAnKVxuXG5kZlsnaW1hZ2UnXSA9IGltZ1BhdGggKyBkZlsnaW1hZ2UnXS5hc3R5cGUoc3RyKVxuZGZbJ2ltYWdlJ10gPSBkZlsnaW1hZ2UnXS5hcHBseShsYW1iZGEgeDogY3YyLnJlc2l6ZShjdjIuaW1yZWFkKHgpLCgyMjQsMjI0KSkpXG5wcmludChkZi5oZWFkKCkpICNERUJVR1xuXG50cmFpbl9YLHRlc3RfWCx0cmFpbl9ZLHRlc3RfWSA9IHRyYWluX3Rlc3Rfc3BsaXQoZGZbJ2ltYWdlJ10sZGZbJ2NsYXNzJ10sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdGVzdF9zaXplPTAuMjAscmFuZG9tX3N0YXRlPTQyLHN0cmF0aWZ5PWRmWydjbGFzcyddKVxuXG5cbnRyYWluX1gsdmFsX1gsdHJhaW5fWSx2YWxfWSA9IHRyYWluX3Rlc3Rfc3BsaXQodHJhaW5fWCx0cmFpbl9ZLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0ZXN0X3NpemU9MC4yMCxyYW5kb21fc3RhdGU9NDIsc3RyYXRpZnk9dHJhaW5fWSlcblxuXG5gYGAifQ== -->
+<pre class="python"><code>#Load data 
+dirName = &quot;../src/data/archive/zero-indexed-files.txt&quot;
+imgPath = &quot;../src/data/archive/Garbage_classification/load/&quot;
+
+df = pd.read_csv(dirName,sep=&#39; &#39;)
+
+df[&#39;image&#39;] = imgPath + df[&#39;image&#39;].astype(str)
+df[&#39;image&#39;] = df[&#39;image&#39;].apply(lambda x: cv2.resize(cv2.imread(x),(224,224)))
+print(df.head()) #DEBUG
+
+train_X,test_X,train_Y,test_Y = train_test_split(df[&#39;image&#39;],df[&#39;class&#39;],
+                                                 test_size=0.20,random_state=42,stratify=df[&#39;class&#39;])
+
+
+train_X,val_X,train_Y,val_Y = train_test_split(train_X,train_Y,
+                                               test_size=0.20,random_state=42,stratify=train_Y)
+</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <div id="section-3.1---initializing-mobilenetv2" class="section level3">
 <h3>Section 3.1 - Initializing MobileNetV2</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgcHl0aG9uXG4jIEZldGNoIG5ldHdvcmsgZnJvbSBrZXJhcywgJiBkZWZpbmUgY3VzdG9tIHBhcmFtcy4gXG4jIFRoaXMgaXMgYSBwcmUtdHJhaW5lZCBtb2RlbCxiYnV0IHdlIHJlbW92ZSB0aGUgbGFzdCBsYXllciAmIHRyYWluIGl0IG91cnNlbHZlcyB0byBmaXQgb3V0IHByb2JsZW1cbm1vZGVsID0gdGYua2VyYXMuYXBwbGljYXRpb25zLm1vYmlsZW5ldF92Mi5Nb2JpbGVOZXRWMihcbiAgICBpbnB1dF9zaGFwZSA9IE5vbmUsIFxuICAgIGFscGhhID0gMS4wLCAjIHVzaW5nIGRlZmF1bHQgaW5wdXQgd2lkdGhcbiAgICBpbmNsdWRlX3RvcCA9IFRydWUsICNpbmNsdWRlIGZ1bGx5LWNvbm5lY3RlZCBpbnB1dCBsYXllclxuICAgIHdlaWdodHMgPSAnaW1hZ2VuZXQnLCAjIERlZmF1bHQgd2VpZ2h0c1xuICAgIGlucHV0X3RlbnNvciA9IE5vbmUsICMgdXNpbmcgZGVmdWFsdCBpbnB1dCB0ZW5zb3Igc3RydWN0dXJlXG4gICAgcG9vbGluZyA9IE5vbmUsICMgbm90IHVzaW5nIHRoaXMgZmVhdHVyZVxuICAgIGNsYXNzZXMgPSAxMDAwLCAjIGRlZmF1bHRcbiAgICBjbGFzc2lmaWVyX2FjdGl2YXRpb24gPSAnc29mdG1heCcgI3NwZWNpZnkgYWN0aXZhdGlvbiBmdW5jdGlvbiBvZiBvdXRwdXQgbGF5ZXJcbikgICBcbmBgYCJ9 -->
+<pre class="python"><code># Fetch network from keras, &amp; define custom params. 
+# This is a pre-trained model,bbut we remove the last layer &amp; train it ourselves to fit out problem
+model = tf.keras.applications.mobilenet_v2.MobileNetV2(
+    input_shape = None, 
+    alpha = 1.0, # using default input width
+    include_top = True, #include fully-connected input layer
+    weights = &#39;imagenet&#39;, # Default weights
+    input_tensor = None, # using defualt input tensor structure
+    pooling = None, # not using this feature
+    classes = 1000, # default
+    classifier_activation = &#39;softmax&#39; #specify activation function of output layer
+)   </code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>TODO: Explain this line-by-line</p>
 </div>
 <div id="section-3.2---customized-output-layers" class="section level3">
 <h3>Section 3.2 - Customized Output Layers</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgcHl0aG9uXG5maW5hbF9sYXllciA9IG1vZGVsLmxheWVyc1stMl0ub3V0cHV0XG5cbm91dHB1dF9sYXllciA9IHRmLmtlcmFzLmxheWVycy5EZW5zZSg3MixhY3RpdmF0aW9uPSdyZWx1JykoZmluYWxfbGF5ZXIpXG5vdXRwdXRfbGF5ZXIgPSB0Zi5rZXJhcy5sYXllcnMuRGVuc2UoMzYsYWN0aXZhdGlvbj0ncmVsdScpKGZpbmFsX2xheWVyKVxub3V0cHV0X2xheWVyID0gdGYua2VyYXMubGF5ZXJzLkRlbnNlKDYsYWN0aXZhdGlvbj0nc29mdG1heCcpKGZpbmFsX2xheWVyKVxuXG4jIGFkZCBpdCBiYWNrIHRvIG1vZGVsXG5tb2RlbCA9IHRmLmtlcmFzLk1vZGVsKGlucHV0cyA9IG1vZGVsLmxheWVyc1swXS5pbnB1dCxvdXRwdXRzID0gb3V0cHV0X2xheWVyKVxuXG5gYGAifQ== -->
+<pre class="python"><code>final_layer = model.layers[-2].output
+
+output_layer = tf.keras.layers.Dense(72,activation=&#39;relu&#39;)(final_layer)
+output_layer = tf.keras.layers.Dense(36,activation=&#39;relu&#39;)(final_layer)
+output_layer = tf.keras.layers.Dense(6,activation=&#39;softmax&#39;)(final_layer)
+
+# add it back to model
+model = tf.keras.Model(inputs = model.layers[0].input,outputs = output_layer)
+</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>TODO:</p>
 </div>
 </div>
 <div id="section-4---results-comparison-with-previous-methods" class="section level2">
@@ -1794,7 +1840,7 @@ Networks</h1>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ2hhbGxlbmdlIDMgLSBDbGFzc2lmaWNhdGlvbiB3aXRoIE5ldXJhbCBOZXR3b3JrcyIKYXV0aG9yOiAiU2FoaWwgR2lsbCwgTHVrZSBJbmdyYW0iCnN1YnRpdGxlOiAiTUFUSCAzMTggLSBXaW50ZXIgMjAyMyIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMgU2VjdGlvbiAxIC0gV2h5IE5ldXJhbCBOZXRzPwoKVE9ETyBBRFZBTlRBR0VTIE9GIE5FVVJBTCBORVRTCgojIyBTZWN0aW9uIDIgLSBUaGUgQXJjaGl0ZWN0dXJlCgojIyMgU2VjdGlvbiAyLjEgLSAKCiMjIFNlY3Rpb24gMyAtIE1vYmlsZU5ldFYyIGluIEFjdGlvbgoKQmVmb3JlIHdlIGJlZ2luLCB3ZSBuZWVkIHRvIGxvYWQgJiBub3JtYWxpemUgb3VyIGRhdGEuCgpgYGB7cHl0aG9ufQoKYGBgCgojIyMgU2VjdGlvbiAzLjEgLSBJbml0aWFsaXppbmcgTW9iaWxlTmV0VjIKCmBgYHtweXRob259CgpgYGAKCiMjIyBTZWN0aW9uIDMuMiAtIEN1c3RvbWl6ZWQgT3V0cHV0IExheWVycwoKYGBge3B5dGhvbn0KCmBgYAoKIyMgU2VjdGlvbiA0IC0gUmVzdWx0cyAmIENvbXBhcmlzb24gd2l0aCBQcmV2aW91cyBNZXRob2RzCgpUT0RPCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ2hhbGxlbmdlIDMgLSBDbGFzc2lmaWNhdGlvbiB3aXRoIE5ldXJhbCBOZXR3b3JrcyIKYXV0aG9yOiAiU2FoaWwgR2lsbCwgTHVrZSBJbmdyYW0iCnN1YnRpdGxlOiAiTUFUSCAzMTggLSBXaW50ZXIgMjAyMyIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMgU2VjdGlvbiAxIC0gV2h5IE5ldXJhbCBOZXRzPwoKVE9ETyBBRFZBTlRBR0VTIE9GIE5FVVJBTCBORVRTCgojIyBTZWN0aW9uIDIgLSBUaGUgQXJjaGl0ZWN0dXJlCgojIyMgU2VjdGlvbiAyLjEgLSAKCiMjIFNlY3Rpb24gMyAtIE1vYmlsZU5ldFYyIGluIEFjdGlvbgoKQmVmb3JlIHdlIGJlZ2luLCB3ZSBuZWVkIHRvIGxvYWQgJiBub3JtYWxpemUgb3VyIGRhdGEuCgpgYGB7cHl0aG9ufQojTG9hZCBkYXRhIApkaXJOYW1lID0gIi4uL3NyYy9kYXRhL2FyY2hpdmUvemVyby1pbmRleGVkLWZpbGVzLnR4dCIKaW1nUGF0aCA9ICIuLi9zcmMvZGF0YS9hcmNoaXZlL0dhcmJhZ2VfY2xhc3NpZmljYXRpb24vbG9hZC8iCgpkZiA9IHBkLnJlYWRfY3N2KGRpck5hbWUsc2VwPScgJykKCmRmWydpbWFnZSddID0gaW1nUGF0aCArIGRmWydpbWFnZSddLmFzdHlwZShzdHIpCmRmWydpbWFnZSddID0gZGZbJ2ltYWdlJ10uYXBwbHkobGFtYmRhIHg6IGN2Mi5yZXNpemUoY3YyLmltcmVhZCh4KSwoMjI0LDIyNCkpKQpwcmludChkZi5oZWFkKCkpICNERUJVRwoKdHJhaW5fWCx0ZXN0X1gsdHJhaW5fWSx0ZXN0X1kgPSB0cmFpbl90ZXN0X3NwbGl0KGRmWydpbWFnZSddLGRmWydjbGFzcyddLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdGVzdF9zaXplPTAuMjAscmFuZG9tX3N0YXRlPTQyLHN0cmF0aWZ5PWRmWydjbGFzcyddKQoKCnRyYWluX1gsdmFsX1gsdHJhaW5fWSx2YWxfWSA9IHRyYWluX3Rlc3Rfc3BsaXQodHJhaW5fWCx0cmFpbl9ZLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRlc3Rfc2l6ZT0wLjIwLHJhbmRvbV9zdGF0ZT00MixzdHJhdGlmeT10cmFpbl9ZKQoKCmBgYAoKIyMjIFNlY3Rpb24gMy4xIC0gSW5pdGlhbGl6aW5nIE1vYmlsZU5ldFYyCgpgYGB7cHl0aG9ufQojIEZldGNoIG5ldHdvcmsgZnJvbSBrZXJhcywgJiBkZWZpbmUgY3VzdG9tIHBhcmFtcy4gCiMgVGhpcyBpcyBhIHByZS10cmFpbmVkIG1vZGVsLGJidXQgd2UgcmVtb3ZlIHRoZSBsYXN0IGxheWVyICYgdHJhaW4gaXQgb3Vyc2VsdmVzIHRvIGZpdCBvdXQgcHJvYmxlbQptb2RlbCA9IHRmLmtlcmFzLmFwcGxpY2F0aW9ucy5tb2JpbGVuZXRfdjIuTW9iaWxlTmV0VjIoCiAgICBpbnB1dF9zaGFwZSA9IE5vbmUsIAogICAgYWxwaGEgPSAxLjAsICMgdXNpbmcgZGVmYXVsdCBpbnB1dCB3aWR0aAogICAgaW5jbHVkZV90b3AgPSBUcnVlLCAjaW5jbHVkZSBmdWxseS1jb25uZWN0ZWQgaW5wdXQgbGF5ZXIKICAgIHdlaWdodHMgPSAnaW1hZ2VuZXQnLCAjIERlZmF1bHQgd2VpZ2h0cwogICAgaW5wdXRfdGVuc29yID0gTm9uZSwgIyB1c2luZyBkZWZ1YWx0IGlucHV0IHRlbnNvciBzdHJ1Y3R1cmUKICAgIHBvb2xpbmcgPSBOb25lLCAjIG5vdCB1c2luZyB0aGlzIGZlYXR1cmUKICAgIGNsYXNzZXMgPSAxMDAwLCAjIGRlZmF1bHQKICAgIGNsYXNzaWZpZXJfYWN0aXZhdGlvbiA9ICdzb2Z0bWF4JyAjc3BlY2lmeSBhY3RpdmF0aW9uIGZ1bmN0aW9uIG9mIG91dHB1dCBsYXllcgopICAgCmBgYAoKVE9ETzogRXhwbGFpbiB0aGlzIGxpbmUtYnktbGluZQoKIyMjIFNlY3Rpb24gMy4yIC0gQ3VzdG9taXplZCBPdXRwdXQgTGF5ZXJzCgpgYGB7cHl0aG9ufQpmaW5hbF9sYXllciA9IG1vZGVsLmxheWVyc1stMl0ub3V0cHV0CgpvdXRwdXRfbGF5ZXIgPSB0Zi5rZXJhcy5sYXllcnMuRGVuc2UoNzIsYWN0aXZhdGlvbj0ncmVsdScpKGZpbmFsX2xheWVyKQpvdXRwdXRfbGF5ZXIgPSB0Zi5rZXJhcy5sYXllcnMuRGVuc2UoMzYsYWN0aXZhdGlvbj0ncmVsdScpKGZpbmFsX2xheWVyKQpvdXRwdXRfbGF5ZXIgPSB0Zi5rZXJhcy5sYXllcnMuRGVuc2UoNixhY3RpdmF0aW9uPSdzb2Z0bWF4JykoZmluYWxfbGF5ZXIpCgojIGFkZCBpdCBiYWNrIHRvIG1vZGVsCm1vZGVsID0gdGYua2VyYXMuTW9kZWwoaW5wdXRzID0gbW9kZWwubGF5ZXJzWzBdLmlucHV0LG91dHB1dHMgPSBvdXRwdXRfbGF5ZXIpCgpgYGAKClRPRE86CgojIyBTZWN0aW9uIDQgLSBSZXN1bHRzICYgQ29tcGFyaXNvbiB3aXRoIFByZXZpb3VzIE1ldGhvZHMKClRPRE8K</div>
 
 
 
