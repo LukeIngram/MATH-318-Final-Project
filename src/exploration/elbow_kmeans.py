@@ -22,8 +22,7 @@ def elbow_kmeans(data):
         dist.append(kmeans.inertia_)
         K.append(k)
     
-    plt.plot(dist)
+    plt.plot(K,dist,'bx-')
     plt.xlabel("K")
     plt.ylabel("Distance")
     plt.show()
-
