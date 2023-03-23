@@ -8,15 +8,13 @@ from tqdm import tqdm
 
 
 
-def elbow_kmeans(data): 
+def elbow_kmeans(data,kmax=60): 
     # Optimize
     # Euclidean distance between clusters, 'Inertia'
     dist = []
     K = []
 
-    #data_long = data.ravel().reshape(-1,1)
-
-    for k in tqdm(range(1,60,5)): #Minimum is number of classes
+    for k in tqdm(range(1,kmax,3)): #Minimum is number of classes
         kmeans = KMeans(n_clusters=k,random_state=0)
         kmeans.fit(data)
         dist.append(kmeans.inertia_)
@@ -25,4 +23,5 @@ def elbow_kmeans(data):
     plt.plot(K,dist,'bx-')
     plt.xlabel("K")
     plt.ylabel("Distance")
+    plt.savefig("elbow_kmeans.png")
     plt.show()

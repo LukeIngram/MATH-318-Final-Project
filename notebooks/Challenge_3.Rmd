@@ -7,15 +7,31 @@ output: html_notebook
 
 ## Section 1 - Why Neural Nets?
 
-TODO
+TODO ADVANTAGES OF NEURAL NETS
 
 ## Section 2 - The Architecture
 
-TODO
+### Section 2.1 - 
 
-## Section 3 - VGG16 in Action
+## Section 3 - MobileNetV2 in Action
 
-TODO
+Before we begin, we need to load & normalize our data.
+
+```{python}
+
+```
+
+### Section 3.1 - Initializing MobileNetV2
+
+```{python}
+
+```
+
+### Section 3.2 - Customized Output Layers
+
+```{python}
+
+```
 
 ## Section 4 - Results & Comparison with Previous Methods
 
