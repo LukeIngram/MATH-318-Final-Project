@@ -38,8 +38,8 @@ def main():
 
     # Fetch network from keras, & define custom params. 
     # This is a pre-trained model,bbut we remove the last layer & train it ourselves to fit out problem
-    mobil_layer = tf.keras.applications.mobilenet_v2.MobileNetV2(
-        input_shape = None, 
+    mobile_layer = tf.keras.applications.mobilenet_v2.MobileNetV2(
+        input_shape = (224,224,3), # our images are in the shape
         alpha = 1.0, # using default input width
         include_top = False, #Don't include fully-connected input layer, we specify our own later
         weights = 'imagenet', # Default weights
@@ -49,26 +49,21 @@ def main():
         classifier_activation = 'softmax' #specify activation function of output layer
     )   
 
-    mobil_layer.trainable = False
-
-    # Create output layer TODO 
+    mobile_layer.trainable = False
 
     model = tf.keras.models.Sequential()
 
- 
     model.add(tf.keras.Input(shape=(224,224,3))) # add our input layer
-    model.add(mobil_layer)
-    
+    model.add(mobile_layer)# attach the pretrained portion of the model
 
-
+    # add our custom layers
     model.add(tf.keras.layers.GlobalAvgPool2D()) # add an additional pooling layer
     model.add(tf.keras.layers.Dense(6,activation='softmax')) # add softmax output layer
-
 
     # Compile final model
     model.compile(
         loss='sparse_categorical_crossentropy',
-        optimizer='SGD', # Stochastic- Gradient - Descent
+        optimizer='adam', # adam optimizer for Stochastic Gradient Descent
         metrics = ['accuracy']
     )
 
