@@ -23,5 +23,5 @@ def elbow_kmeans(data,kmax=60):
     plt.plot(K,dist,'bx-')
     plt.xlabel("K")
     plt.ylabel("Distance")
-    plt.savefig("elbow_kmeans.png")
+    plt.title("Elbow Optimization for Kmeans using the Inertia method")
     plt.show()

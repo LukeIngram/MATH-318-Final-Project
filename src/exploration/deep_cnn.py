@@ -38,30 +38,32 @@ def main():
 
     # Fetch network from keras, & define custom params. 
     # This is a pre-trained model,bbut we remove the last layer & train it ourselves to fit out problem
-    model = tf.keras.applications.mobilenet_v2.MobileNetV2(
+    mobil_layer = tf.keras.applications.mobilenet_v2.MobileNetV2(
         input_shape = None, 
         alpha = 1.0, # using default input width
-        include_top = True, #include fully-connected input layer
+        include_top = False, #Don't include fully-connected input layer, we specify our own later
         weights = 'imagenet', # Default weights
         input_tensor = None, # using default input tensor structure
-        pooling = None, # not using this feaure
+        pooling = None, # not using this feature
         classes = 1000, # default
         classifier_activation = 'softmax' #specify activation function of output layer
     )   
 
-    for layer in model.layers: 
-        layer.trainable = False # Do not overwrite existing weights
+    mobil_layer.trainable = False
 
     # Create output layer TODO 
 
-    final_layer = model.layers[-2].output
+    model = tf.keras.models.Sequential()
 
-    output_layer = tf.keras.layers.Dense(144,activation='relu')(final_layer)
-    output_layer = tf.keras.layers.Dense(72,activation='relu')(final_layer)
-    output_layer = tf.keras.layers.Dense(6,activation='softmax')(final_layer)
+ 
+    model.add(tf.keras.Input(shape=(224,224,3))) # add our input layer
+    model.add(mobil_layer)
+    
 
-    # add it back to model
-    model = tf.keras.Model(inputs = model.layers[0].input,outputs = output_layer)
+
+    model.add(tf.keras.layers.GlobalAvgPool2D()) # add an additional pooling layer
+    model.add(tf.keras.layers.Dense(6,activation='softmax')) # add softmax output layer
+
 
     # Compile final model
     model.compile(
@@ -81,7 +83,7 @@ def main():
     model.evaluate(test_X,test_Y) 
 
     # SAVE FOR LATER 
-    model.save('models/mobileNetV2.h5')
+    model.save('models/mobileNetV2_2.h5')
 
     # Generate plot
 
