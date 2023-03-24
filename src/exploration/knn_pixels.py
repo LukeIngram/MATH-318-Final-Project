@@ -40,22 +40,18 @@ def main():
 
     df = pd.read_csv("data/archive/zero-indexed-files.txt",sep=' ')
    
-    #pd.concat([pd.Series([X_data[:,i] for i in range(X_data.shape[1])]),df['class']],axis=1)
-
-
-    #df['image'] = X_data
-    print(df.head()) #DEBUG
+    print(df.head(5)) #DEBUG
 
     
     X_train,X_test,Y_train,Y_test = train_test_split(np.array([X_data[:,i] for i in range(X_data.shape[1])]).T,df['class'],
                                                      test_size=0.20,random_state=42,stratify=df['class'])
     
-    # Reduce down to 95% explained variance
+    # Reduce down with PCA (using as many components as our RAM limitations allow)
     
     Xs_train = X_train/255.0
     Xs_test = X_test/255.0
 
-    pca = IncrementalPCA(n_components = None,batch_size=10) # incrimental used as entire set cannot fit into memory 
+    pca = IncrementalPCA(n_components = None,batch_size=10) # incremental used as entire set cannot fit into memory 
     tqdm(pca.fit(Xs_train))
     Xs_train_reduced = pca.transform(Xs_train) 
     Xs_test_reduced = pca.transform(Xs_test)
@@ -65,7 +61,7 @@ def main():
     print(f"Dimensions of data after PCA: {Xs_train_reduced.shape}") 
 
     # find optimal neighbors
-    crossValidate(Xs_train_reduced,Y_train,kmax=500)
+    crossValidate(Xs_train_reduced,Y_train,kmax=50)
     
 
     #knn = KNeighborsClassifier()
