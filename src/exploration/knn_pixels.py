@@ -3,11 +3,10 @@
 # NOTE: DO NOT RUN OUTSIDE OF HEAVY COMPUTE ENVIRONMENT
 
 from sklearn.model_selection import train_test_split,cross_val_score
-from sklearn.decomposition import PCA
+from sklearn.decomposition import IncrementalPCA 
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix,classification_report
-from 
 import matplotlib.pyplot as plt 
 import numpy as np 
 import pandas as pd 
@@ -40,29 +39,34 @@ def main():
 
     df = pd.read_csv("data/archive/zero-indexed-files.txt",sep=' ')
    
-    df['image'] = [i for i in  X_data]
+    #pd.concat([pd.Series([X_data[:,i] for i in range(X_data.shape[1])]),df['class']],axis=1)
 
+
+    #df['image'] = X_data
     print(df.head()) #DEBUG
+
     
-    X_train,X_test,Y_train,Y_train = train_test_split(df['image'],df['class'],
+    X_train,X_test,Y_train,Y_train = train_test_split(np.array([X_data[:,i] for i in range(X_data.shape[1])]).T,df['class'],
                                                      test_size=0.20,random_state=42,stratify=df['class'])
     
     # Reduce down to 95% explained variance
-    scaler = MinMaxScaler()
-    scaler.fit(X_train) 
+    
+    Xs_train = X_train/255.0
+    Xs_test = X_test/255.0
 
-    Xs_train = scaler.transform(X_train)
-    Xs_test = scaler.transform(X_train)
-
-    pca = PCA(n_components = 0.95) # n_components < 1 converts to pc's needed for that expl. var.
-    pca.fit(Xs_train) 
-    Xs_train_reduced = pca.transform(Xs_train) #<------ uncommnet to run 
+    pca = IncrementalPCA(n_components = None,batch_size=10) # incrimental used as entire set cannot fit into memory 
+    tqdm(pca.fit(Xs_train))
+    Xs_train_reduced = pca.transform(Xs_train) 
     Xs_test_reduced = pca.transform(Xs_test)
+    
+    print(pca.explained_variance_)
 
     print(f"Dimensions of data after PCA: {Xs_train_reduced.shape}") 
 
     # find optimal neighbors
-    crossValidate(Xs_train_reduced,Y_train,)
+    crossValidate(Xs_train_reduced,Y_train,kmax=15)
 
-    knn = KNeighborsClassifier()
+    #knn = KNeighborsClassifier()
 
+if __name__ == '__main__': 
+    main()
