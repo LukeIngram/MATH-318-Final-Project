@@ -114,10 +114,10 @@ def main():
 
 
     print("CV")
-    crossValidate(train_hists,train_Y,kmax=50)
+    #crossValidate(train_hists,train_Y,kmax=50)
 
     # Fit Optimal
-    knn = KNeighborsClassifier(n_neighbors=11)
+    knn = KNeighborsClassifier(n_neighbors=4)
     knn.fit(train_hists,train_Y)
 
     res = knn.predict(test_hists)
