@@ -26,7 +26,7 @@ def crossValidate(X,Y,folds=10,kmax = 10):
         kscores.append(cv.mean())
     
     plt.plot(list(range(1,kmax)),kscores)  
-    plt.savefig("Optimal_neighbors_sift.png")
+    plt.savefig("Optimal_neighbors_pixel.png")
     plt.show()
 
 

@@ -1756,14 +1756,40 @@ Networks</h1>
 
 
 <!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShcInJldGljdWxhdGVcIilcblN5cy5zZXRlbnYoUkVUSUNVTEFURV9QWVRIT04gPSBcIi4uL3ZlbnYvYmluL3B5dGhvbjNcIikgIyBTZXQgcHl0aG9uIGVudlxuYGBgIn0= -->
+<pre class="r"><code>library(&quot;reticulate&quot;)
+Sys.setenv(RETICULATE_PYTHON = &quot;../venv/bin/python3&quot;) # Set python env</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgcHl0aG9uXG5yZXRpY3VsYXRlOjpyZXBsX3B5dGhvbigpXG5pbXBvcnQgY3YyIFxuaW1wb3J0IHRlbnNvcmZsb3cgYXMgdGZcbmltcG9ydCBwYW5kYXMgYXMgcGQgXG5pbXBvcnQgbnVtcHkgYXMgbnAgXG5pbXBvcnQgbWF0cGxvdGxpYi5weXBsb3QgYXMgcGx0XG5mcm9tIHNrbGVhcm4ubW9kZWxfc2VsZWN0aW9uIGltcG9ydCB0cmFpbl90ZXN0X3NwbGl0XG5pbXBvcnQgb3NcblxuYGBgIn0= -->
+<pre class="python"><code>reticulate::repl_python()
+import cv2 
+import tensorflow as tf
+import pandas as pd 
+import numpy as np 
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+import os
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <div id="section-1---why-neural-nets" class="section level2">
 <h2>Section 1 - Why Neural Nets?</h2>
 <p>TODO ADVANTAGES OF NEURAL NETS</p>
 </div>
 <div id="section-2---the-architecture" class="section level2">
 <h2>Section 2 - The Architecture</h2>
-<div id="section-2.1--" class="section level3">
-<h3>Section 2.1 -</h3>
+<div id="section-2.1---mobilenetv2" class="section level3">
+<h3>Section 2.1 - MobileNetV2</h3>
+</div>
+<div id="section-2.2---transfer-learning" class="section level3">
+<h3>Section 2.2 - Transfer Learning</h3>
 </div>
 </div>
 <div id="section-3---mobilenetv2-in-action" class="section level2">
@@ -1771,7 +1797,7 @@ Networks</h1>
 <p>Before we begin, we need to load &amp; normalize our data.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgcHl0aG9uXG4jTG9hZCBkYXRhIFxuZGlyTmFtZSA9IFwiLi4vc3JjL2RhdGEvYXJjaGl2ZS96ZXJvLWluZGV4ZWQtZmlsZXMudHh0XCJcbmltZ1BhdGggPSBcIi4uL3NyYy9kYXRhL2FyY2hpdmUvR2FyYmFnZV9jbGFzc2lmaWNhdGlvbi9sb2FkL1wiXG5cbmRmID0gcGQucmVhZF9jc3YoZGlyTmFtZSxzZXA9JyAnKVxuXG5kZlsnaW1hZ2UnXSA9IGltZ1BhdGggKyBkZlsnaW1hZ2UnXS5hc3R5cGUoc3RyKVxuZGZbJ2ltYWdlJ10gPSBkZlsnaW1hZ2UnXS5hcHBseShsYW1iZGEgeDogY3YyLnJlc2l6ZShjdjIuaW1yZWFkKHgpLCgyMjQsMjI0KSkpXG5wcmludChkZi5oZWFkKCkpICNERUJVR1xuXG50cmFpbl9YLHRlc3RfWCx0cmFpbl9ZLHRlc3RfWSA9IHRyYWluX3Rlc3Rfc3BsaXQoZGZbJ2ltYWdlJ10sZGZbJ2NsYXNzJ10sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdGVzdF9zaXplPTAuMjAscmFuZG9tX3N0YXRlPTQyLHN0cmF0aWZ5PWRmWydjbGFzcyddKVxuXG5cbnRyYWluX1gsdmFsX1gsdHJhaW5fWSx2YWxfWSA9IHRyYWluX3Rlc3Rfc3BsaXQodHJhaW5fWCx0cmFpbl9ZLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0ZXN0X3NpemU9MC4yMCxyYW5kb21fc3RhdGU9NDIsc3RyYXRpZnk9dHJhaW5fWSlcblxuXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgcHl0aG9uXG4jTG9hZCBkYXRhIFxuZGlyTmFtZSA9IFwiLi4vc3JjL2RhdGEvYXJjaGl2ZS96ZXJvLWluZGV4ZWQtZmlsZXMudHh0XCJcbmltZ1BhdGggPSBcIi4uL3NyYy9kYXRhL2FyY2hpdmUvR2FyYmFnZV9jbGFzc2lmaWNhdGlvbi9sb2FkL1wiXG5cbmRmID0gcGQucmVhZF9jc3YoZGlyTmFtZSxzZXA9JyAnKVxuXG5kZlsnaW1hZ2UnXSA9IGltZ1BhdGggKyBkZlsnaW1hZ2UnXS5hc3R5cGUoc3RyKVxuZGZbJ2ltYWdlJ10gPSBkZlsnaW1hZ2UnXS5hcHBseShsYW1iZGEgeDogY3YyLnJlc2l6ZShjdjIuaW1yZWFkKHgpLCgyMjQsMjI0KSkpXG5wcmludChkZi5oZWFkKCkpICNERUJVR1xuYGBgIn0= -->
 <pre class="python"><code>#Load data 
 dirName = &quot;../src/data/archive/zero-indexed-files.txt&quot;
 imgPath = &quot;../src/data/archive/Garbage_classification/load/&quot;
@@ -1780,25 +1806,40 @@ df = pd.read_csv(dirName,sep=&#39; &#39;)
 
 df[&#39;image&#39;] = imgPath + df[&#39;image&#39;].astype(str)
 df[&#39;image&#39;] = df[&#39;image&#39;].apply(lambda x: cv2.resize(cv2.imread(x),(224,224)))
-print(df.head()) #DEBUG
-
-train_X,test_X,train_Y,test_Y = train_test_split(df[&#39;image&#39;],df[&#39;class&#39;],
+print(df.head()) #DEBUG</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpbWFnZSAgY2xhc3NcbjAgIFtbWzE3NiwgMTg5LCAxOTFdLCBbMTc3LCAxOTAsIDE5Ml0sIFsxNzgsIDE5MSwuLi4gICAgICAwXG4xICBbW1sxNTQsIDE2NywgMTgyXSwgWzE1MSwgMTY0LCAxODBdLCBbMTUyLCAxNjUsLi4uICAgICAgMFxuMiAgW1tbMTU5LCAxNzEsIDE4M10sIFsxNTcsIDE2OSwgMTgxXSwgWzE1OCwgMTcwLC4uLiAgICAgIDBcbjMgIFtbWzE0MiwgMTU0LCAxNjhdLCBbMTQyLCAxNTQsIDE2OF0sIFsxMzksIDE1MSwuLi4gICAgICAwXG40ICBbW1sxNjUsIDE3NywgMTg5XSwgWzE2NSwgMTc3LCAxODldLCBbMTY2LCAxNzgsLi4uICAgICAgMFxuIn0= -->
+<pre><code>                                               image  class
+0  [[[176, 189, 191], [177, 190, 192], [178, 191,...      0
+1  [[[154, 167, 182], [151, 164, 180], [152, 165,...      0
+2  [[[159, 171, 183], [157, 169, 181], [158, 170,...      0
+3  [[[142, 154, 168], [142, 154, 168], [139, 151,...      0
+4  [[[165, 177, 189], [165, 177, 189], [166, 178,...      0</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgcHl0aG9uXG50cmFpbl9YLHRlc3RfWCx0cmFpbl9ZLHRlc3RfWSA9IHRyYWluX3Rlc3Rfc3BsaXQoZGZbJ2ltYWdlJ10sZGZbJ2NsYXNzJ10sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdGVzdF9zaXplPTAuMjAscmFuZG9tX3N0YXRlPTQyLHN0cmF0aWZ5PWRmWydjbGFzcyddKVxuXG5cbnRyYWluX1gsdmFsX1gsdmFsX1gsdmFsX1kgPSB0cmFpbl90ZXN0X3NwbGl0KHRyYWluX1gsdHJhaW5fWSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdGVzdF9zaXplPTAuMjAscmFuZG9tX3N0YXRlPTQyLHN0cmF0aWZ5PXRyYWluX1kpXG5cbiMgTm9ybWFsaXplIGRhdGEgXG50cmFpbl9YID0gdHJhaW5fWC8yNTUuMCBcbnRlc3RfWCA9IHRlc3RfWC8yNTUuMFxudmFsX1ggPSB2YWxfWC8yNTUuMFxuXG5gYGAifQ== -->
+<pre class="python"><code>train_X,test_X,train_Y,test_Y = train_test_split(df[&#39;image&#39;],df[&#39;class&#39;],
                                                  test_size=0.20,random_state=42,stratify=df[&#39;class&#39;])
 
 
-train_X,val_X,train_Y,val_Y = train_test_split(train_X,train_Y,
+train_X,val_X,val_X,val_Y = train_test_split(train_X,train_Y,
                                                test_size=0.20,random_state=42,stratify=train_Y)
+
+# Normalize data 
+train_X = train_X/255.0 
+test_X = test_X/255.0
+val_X = val_X/255.0
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<div id="section-3.1---initializing-mobilenetv2" class="section level3">
-<h3>Section 3.1 - Initializing MobileNetV2</h3>
+<div id="section-3.1---initializing-mobilnetv2" class="section level3">
+<h3>Section 3.1 - Initializing MobilNetV2</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgcHl0aG9uXG4jIEZldGNoIG5ldHdvcmsgZnJvbSBrZXJhcywgJiBkZWZpbmUgY3VzdG9tIHBhcmFtcy4gXG4jIFRoaXMgaXMgYSBwcmUtdHJhaW5lZCBtb2RlbCxiYnV0IHdlIHJlbW92ZSB0aGUgbGFzdCBsYXllciAmIHRyYWluIGl0IG91cnNlbHZlcyB0byBmaXQgb3V0IHByb2JsZW1cbm1vZGVsID0gdGYua2VyYXMuYXBwbGljYXRpb25zLm1vYmlsZW5ldF92Mi5Nb2JpbGVOZXRWMihcbiAgICBpbnB1dF9zaGFwZSA9IE5vbmUsIFxuICAgIGFscGhhID0gMS4wLCAjIHVzaW5nIGRlZmF1bHQgaW5wdXQgd2lkdGhcbiAgICBpbmNsdWRlX3RvcCA9IFRydWUsICNpbmNsdWRlIGZ1bGx5LWNvbm5lY3RlZCBpbnB1dCBsYXllclxuICAgIHdlaWdodHMgPSAnaW1hZ2VuZXQnLCAjIERlZmF1bHQgd2VpZ2h0c1xuICAgIGlucHV0X3RlbnNvciA9IE5vbmUsICMgdXNpbmcgZGVmdWFsdCBpbnB1dCB0ZW5zb3Igc3RydWN0dXJlXG4gICAgcG9vbGluZyA9IE5vbmUsICMgbm90IHVzaW5nIHRoaXMgZmVhdHVyZVxuICAgIGNsYXNzZXMgPSAxMDAwLCAjIGRlZmF1bHRcbiAgICBjbGFzc2lmaWVyX2FjdGl2YXRpb24gPSAnc29mdG1heCcgI3NwZWNpZnkgYWN0aXZhdGlvbiBmdW5jdGlvbiBvZiBvdXRwdXQgbGF5ZXJcbikgICBcbmBgYCJ9 -->
-<pre class="python"><code># Fetch network from keras, &amp; define custom params. 
-# This is a pre-trained model,bbut we remove the last layer &amp; train it ourselves to fit out problem
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgcHl0aG9uXG4jRmV0Y2ggbmV0d29yayBmcm9tIGtlcmFzLCAmIGRlZmluZSBjdXN0b20gcGFyYW1zLiBcbiMgVGhpcyBpcyBhIHByZS10cmFpbmVkIG1vZGVsLGJidXQgd2UgcmVtb3ZlIHRoZSBsYXN0IGxheWVyIFxuIyAmIHRyYWluIGl0IG91cnNlbHZlcyB0byBmaXQgb3V0IHByb2JsZW1cbm1vZGVsID0gdGYua2VyYXMuYXBwbGljYXRpb25zLm1vYmlsZW5ldF92Mi5Nb2JpbGVOZXRWMihcbiAgICBpbnB1dF9zaGFwZSA9IE5vbmUsIFxuICAgIGFscGhhID0gMS4wLCAjIHVzaW5nIGRlZmF1bHQgaW5wdXQgd2lkdGhcbiAgICBpbmNsdWRlX3RvcCA9IFRydWUsICNpbmNsdWRlIGZ1bGx5LWNvbm5lY3RlZCBpbnB1dCBsYXllclxuICAgIHdlaWdodHMgPSAnaW1hZ2VuZXQnLCAjIERlZmF1bHQgd2VpZ2h0c1xuICAgIGlucHV0X3RlbnNvciA9IE5vbmUsICMgdXNpbmcgZGVmdWFsdCBpbnB1dCB0ZW5zb3Igc3RydWN0dXJlXG4gICAgcG9vbGluZyA9IE5vbmUsICMgbm90IHVzaW5nIHRoaXMgZmVhdHVyZVxuICAgIGNsYXNzZXMgPSAxMDAwLCAjIGRlZmF1bHRcbiAgICBjbGFzc2lmaWVyX2FjdGl2YXRpb24gPSAnc29mdG1heCcgI3NwZWNpZnkgYWN0aXZhdGlvbiBmdW5jdGlvbiBvZiBvdXRwdXQgbGF5ZXJcbikgICBcbmBgYCJ9 -->
+<pre class="python"><code>#Fetch network from keras, &amp; define custom params. 
+# This is a pre-trained model,bbut we remove the last layer 
+# &amp; train it ourselves to fit out problem
 model = tf.keras.applications.mobilenet_v2.MobileNetV2(
     input_shape = None, 
     alpha = 1.0, # using default input width
@@ -1810,37 +1851,93 @@ model = tf.keras.applications.mobilenet_v2.MobileNetV2(
     classifier_activation = &#39;softmax&#39; #specify activation function of output layer
 )   </code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTWV0YWwgZGV2aWNlIHNldCB0bzogQXBwbGUgTTEgUHJvXG5cbnN5c3RlbU1lbW9yeTogMTYuMDAgR0Jcbm1heENhY2hlU2l6ZTogNS4zMyBHQlxuIn0= -->
+<pre><code>Metal device set to: Apple M1 Pro
+
+systemMemory: 16.00 GB
+maxCacheSize: 5.33 GB</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiMjAyMy0wMy0yMyAyMjowOToyOC40NzE2MTk6IEkgdGVuc29yZmxvdy9jb3JlL2NvbW1vbl9ydW50aW1lL3BsdWdnYWJsZV9kZXZpY2UvcGx1Z2dhYmxlX2RldmljZV9mYWN0b3J5LmNjOjMwNl0gQ291bGQgbm90IGlkZW50aWZ5IE5VTUEgbm9kZSBvZiBwbGF0Zm9ybSBHUFUgSUQgMCwgZGVmYXVsdGluZyB0byAwLiBZb3VyIGtlcm5lbCBtYXkgbm90IGhhdmUgYmVlbiBidWlsdCB3aXRoIE5VTUEgc3VwcG9ydC5cbjIwMjMtMDMtMjMgMjI6MDk6MjguNDcyMTk5OiBJIHRlbnNvcmZsb3cvY29yZS9jb21tb25fcnVudGltZS9wbHVnZ2FibGVfZGV2aWNlL3BsdWdnYWJsZV9kZXZpY2VfZmFjdG9yeS5jYzoyNzJdIENyZWF0ZWQgVGVuc29yRmxvdyBkZXZpY2UgKC9qb2I6bG9jYWxob3N0L3JlcGxpY2E6MC90YXNrOjAvZGV2aWNlOkdQVTowIHdpdGggMCBNQiBtZW1vcnkpIC0+IHBoeXNpY2FsIFBsdWdnYWJsZURldmljZSAoZGV2aWNlOiAwLCBuYW1lOiBNRVRBTCwgcGNpIGJ1cyBpZDogPHVuZGVmaW5lZD4pXG4ifQ== -->
+<pre><code>2023-03-23 22:09:28.471619: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:306] Could not identify NUMA node of platform GPU ID 0, defaulting to 0. Your kernel may not have been built with NUMA support.
+2023-03-23 22:09:28.472199: I tensorflow/core/common_runtime/pluggable_device/pluggable_device_factory.cc:272] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 0 MB memory) -&gt; physical PluggableDevice (device: 0, name: METAL, pci bus id: &lt;undefined&gt;)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgcHl0aG9uXG4jIE1ha2Ugc3VyZSBleHNpdGluZyBsYXllcnMgKGNvbnZvbHV0aW9uYXJ5ICYgcG9vbGluZykgcmVtYWluIHVudG91Y2hlZFxuZm9yIGxheWVyIGluIG1vZGVsLmxheWVyczogXG4gICAgbGF5ZXIudHJhaW5hYmxlID0gRmFsc2UgXG5cbmBgYCJ9 -->
+<pre class="python"><code># Make sure exsiting layers (convolutionary &amp; pooling) remain untouched
+for layer in model.layers: 
+    layer.trainable = False 
+</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>TODO: Explain this line-by-line</p>
 </div>
 <div id="section-3.2---customized-output-layers" class="section level3">
 <h3>Section 3.2 - Customized Output Layers</h3>
+<p>TODO: Explain the transfer learning step &amp; why we are using this
+many layers</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgcHl0aG9uXG5maW5hbF9sYXllciA9IG1vZGVsLmxheWVyc1stMl0ub3V0cHV0XG5cbm91dHB1dF9sYXllciA9IHRmLmtlcmFzLmxheWVycy5EZW5zZSg3MixhY3RpdmF0aW9uPSdyZWx1JykoZmluYWxfbGF5ZXIpXG5vdXRwdXRfbGF5ZXIgPSB0Zi5rZXJhcy5sYXllcnMuRGVuc2UoMzYsYWN0aXZhdGlvbj0ncmVsdScpKGZpbmFsX2xheWVyKVxub3V0cHV0X2xheWVyID0gdGYua2VyYXMubGF5ZXJzLkRlbnNlKDYsYWN0aXZhdGlvbj0nc29mdG1heCcpKGZpbmFsX2xheWVyKVxuXG4jIGFkZCBpdCBiYWNrIHRvIG1vZGVsXG5tb2RlbCA9IHRmLmtlcmFzLk1vZGVsKGlucHV0cyA9IG1vZGVsLmxheWVyc1swXS5pbnB1dCxvdXRwdXRzID0gb3V0cHV0X2xheWVyKVxuXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgcHl0aG9uXG5maW5hbF9sYXllciA9IG1vZGVsLmxheWVyc1stMl0ub3V0cHV0XG5cbm91dHB1dF9sYXllciA9IHRmLmtlcmFzLmxheWVycy5EZW5zZSgxNDQsYWN0aXZhdGlvbj0ncmVsdScpKGZpbmFsX2xheWVyKVxub3V0cHV0X2xheWVyID0gdGYua2VyYXMubGF5ZXJzLkRlbnNlKDcyLGFjdGl2YXRpb249J3JlbHUnKShmaW5hbF9sYXllcilcbm91dHB1dF9sYXllciA9IHRmLmtlcmFzLmxheWVycy5EZW5zZSg2LGFjdGl2YXRpb249J3NvZnRtYXgnKShmaW5hbF9sYXllcilcblxuIyBhZGQgaXQgYmFjayB0byBtb2RlbFxubW9kZWwgPSB0Zi5rZXJhcy5Nb2RlbChpbnB1dHMgPSBtb2RlbC5sYXllcnNbMF0uaW5wdXQsb3V0cHV0cyA9IG91dHB1dF9sYXllcilcblxuIyBDb21waWxlIGZpbmFsIG1vZGVsXG5tb2RlbC5jb21waWxlKFxuICAgIGxvc3M9J3NwYXJzZV9jYXRlZ29yaWNhbF9jcm9zc2VudHJvcHknLFxuICAgIG9wdGltaXplcj0nU0dEJywgIyBTdG9jaGFzdGljLSBHcmFkaWVudCAtIERlc2NlbnRcbiAgICBtZXRyaWNzID0gWydhY2N1cmFjeSddXG4pXG5cbmBgYCJ9 -->
 <pre class="python"><code>final_layer = model.layers[-2].output
 
+output_layer = tf.keras.layers.Dense(144,activation=&#39;relu&#39;)(final_layer)
 output_layer = tf.keras.layers.Dense(72,activation=&#39;relu&#39;)(final_layer)
-output_layer = tf.keras.layers.Dense(36,activation=&#39;relu&#39;)(final_layer)
 output_layer = tf.keras.layers.Dense(6,activation=&#39;softmax&#39;)(final_layer)
 
 # add it back to model
 model = tf.keras.Model(inputs = model.layers[0].input,outputs = output_layer)
+
+# Compile final model
+model.compile(
+    loss=&#39;sparse_categorical_crossentropy&#39;,
+    optimizer=&#39;SGD&#39;, # Stochastic- Gradient - Descent
+    metrics = [&#39;accuracy&#39;]
+)
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>TODO:</p>
+</div>
+<div id="section-3.3---training-the-model" class="section level3">
+<h3>Section 3.3 - Training the Model</h3>
+<p>TODO: explain stochastic gradient descent</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgcHl0aG9uXG4jIENvbnZlcnQgdG8gZmxvYXQgZm9yIHRlbnNvciBjb252ZXJzaW9uIFxudHJhaW5fWCA9IG5wLmFzYXJyYXkobGlzdCh0cmFpbl9YKSxkdHlwZT0nZmxvYXQzMicpXG50ZXN0X1ggPSBucC5hc2FycmF5KGxpc3QodGVzdF9YKSxkdHlwZT0nZmxvYXQzMicpXG52YWxfWCA9IG5wLmFzYXJyYXkobGlzdCh2YWxfWCksZHR5cGU9J2Zsb2F0MzInKVxuXG5cbnRyYWluaW5nX2hpc3RvcnkgPSBtb2RlbC5maXQodHJhaW5fWCx0cmFpbl9ZLGVwb2NocyA9IDMwLHZhbGlkYXRpb25fZGF0YT0odmFsX1gsdmFsX1kpKVxuXG5wbHQuY2xmKClcbnBsdC5yYygnYXhlcycsIGF4aXNiZWxvdz1UcnVlKVxucGx0LmdyaWQobGluZXN0eWxlPSdkb3R0ZWQnKVxucGx0LnBsb3QodHJhaW5pbmdfaGlzdG9yeVsnYWNjdXJhY3knXSxsYWJlbD0nYWNjdXJhY3knKVxucGx0LnBsb3QodHJhaW5pbmdfaGlzdG9yeVsndmFsX2FjY3VyYWN5J10sbGFiZWwgPSAndmFsX2FjY3VyYWN5J10gXG5fID0gcGx0LnhsYWJlbCgnRXBvY2gnKVxuXyA9IHBsdC55bGFiZWwoJ0FjY3VyYWN5Jylcbl8gPSBwbHQudGl0bGUoJ1RyYWluaW5nICYgVmFsaWRhdGlvbiBBY2N1cmFjeSBEdXJpbmcgVHJhaW5pbmcnKVxuXG5wbHQuc2hvdygpXG5cblxubW9kZWwuZXZhbHVhdGUodGVzdF9YLHRlc3RfWSkgXG5cbmBgYCJ9 -->
+<pre class="python"><code># Convert to float for tensor conversion 
+train_X = np.asarray(list(train_X),dtype=&#39;float32&#39;)
+test_X = np.asarray(list(test_X),dtype=&#39;float32&#39;)
+val_X = np.asarray(list(val_X),dtype=&#39;float32&#39;)
+
+
+training_history = model.fit(train_X,train_Y,epochs = 30,validation_data=(val_X,val_Y))
+
+plt.clf()
+plt.rc(&#39;axes&#39;, axisbelow=True)
+plt.grid(linestyle=&#39;dotted&#39;)
+plt.plot(training_history[&#39;accuracy&#39;],label=&#39;accuracy&#39;)
+plt.plot(training_history[&#39;val_accuracy&#39;],label = &#39;val_accuracy&#39;] 
+_ = plt.xlabel(&#39;Epoch&#39;)
+_ = plt.ylabel(&#39;Accuracy&#39;)
+_ = plt.title(&#39;Training &amp; Validation Accuracy During Training&#39;)
+
+plt.show()
+
+
+model.evaluate(test_X,test_Y) 
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 </div>
 </div>
 <div id="section-4---results-comparison-with-previous-methods" class="section level2">
 <h2>Section 4 - Results &amp; Comparison with Previous Methods</h2>
-<p>TODO</p>
+<p>TODO: load a few classified results &amp; display</p>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ2hhbGxlbmdlIDMgLSBDbGFzc2lmaWNhdGlvbiB3aXRoIE5ldXJhbCBOZXR3b3JrcyIKYXV0aG9yOiAiU2FoaWwgR2lsbCwgTHVrZSBJbmdyYW0iCnN1YnRpdGxlOiAiTUFUSCAzMTggLSBXaW50ZXIgMjAyMyIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMgU2VjdGlvbiAxIC0gV2h5IE5ldXJhbCBOZXRzPwoKVE9ETyBBRFZBTlRBR0VTIE9GIE5FVVJBTCBORVRTCgojIyBTZWN0aW9uIDIgLSBUaGUgQXJjaGl0ZWN0dXJlCgojIyMgU2VjdGlvbiAyLjEgLSAKCiMjIFNlY3Rpb24gMyAtIE1vYmlsZU5ldFYyIGluIEFjdGlvbgoKQmVmb3JlIHdlIGJlZ2luLCB3ZSBuZWVkIHRvIGxvYWQgJiBub3JtYWxpemUgb3VyIGRhdGEuCgpgYGB7cHl0aG9ufQojTG9hZCBkYXRhIApkaXJOYW1lID0gIi4uL3NyYy9kYXRhL2FyY2hpdmUvemVyby1pbmRleGVkLWZpbGVzLnR4dCIKaW1nUGF0aCA9ICIuLi9zcmMvZGF0YS9hcmNoaXZlL0dhcmJhZ2VfY2xhc3NpZmljYXRpb24vbG9hZC8iCgpkZiA9IHBkLnJlYWRfY3N2KGRpck5hbWUsc2VwPScgJykKCmRmWydpbWFnZSddID0gaW1nUGF0aCArIGRmWydpbWFnZSddLmFzdHlwZShzdHIpCmRmWydpbWFnZSddID0gZGZbJ2ltYWdlJ10uYXBwbHkobGFtYmRhIHg6IGN2Mi5yZXNpemUoY3YyLmltcmVhZCh4KSwoMjI0LDIyNCkpKQpwcmludChkZi5oZWFkKCkpICNERUJVRwoKdHJhaW5fWCx0ZXN0X1gsdHJhaW5fWSx0ZXN0X1kgPSB0cmFpbl90ZXN0X3NwbGl0KGRmWydpbWFnZSddLGRmWydjbGFzcyddLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdGVzdF9zaXplPTAuMjAscmFuZG9tX3N0YXRlPTQyLHN0cmF0aWZ5PWRmWydjbGFzcyddKQoKCnRyYWluX1gsdmFsX1gsdHJhaW5fWSx2YWxfWSA9IHRyYWluX3Rlc3Rfc3BsaXQodHJhaW5fWCx0cmFpbl9ZLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRlc3Rfc2l6ZT0wLjIwLHJhbmRvbV9zdGF0ZT00MixzdHJhdGlmeT10cmFpbl9ZKQoKCmBgYAoKIyMjIFNlY3Rpb24gMy4xIC0gSW5pdGlhbGl6aW5nIE1vYmlsZU5ldFYyCgpgYGB7cHl0aG9ufQojIEZldGNoIG5ldHdvcmsgZnJvbSBrZXJhcywgJiBkZWZpbmUgY3VzdG9tIHBhcmFtcy4gCiMgVGhpcyBpcyBhIHByZS10cmFpbmVkIG1vZGVsLGJidXQgd2UgcmVtb3ZlIHRoZSBsYXN0IGxheWVyICYgdHJhaW4gaXQgb3Vyc2VsdmVzIHRvIGZpdCBvdXQgcHJvYmxlbQptb2RlbCA9IHRmLmtlcmFzLmFwcGxpY2F0aW9ucy5tb2JpbGVuZXRfdjIuTW9iaWxlTmV0VjIoCiAgICBpbnB1dF9zaGFwZSA9IE5vbmUsIAogICAgYWxwaGEgPSAxLjAsICMgdXNpbmcgZGVmYXVsdCBpbnB1dCB3aWR0aAogICAgaW5jbHVkZV90b3AgPSBUcnVlLCAjaW5jbHVkZSBmdWxseS1jb25uZWN0ZWQgaW5wdXQgbGF5ZXIKICAgIHdlaWdodHMgPSAnaW1hZ2VuZXQnLCAjIERlZmF1bHQgd2VpZ2h0cwogICAgaW5wdXRfdGVuc29yID0gTm9uZSwgIyB1c2luZyBkZWZ1YWx0IGlucHV0IHRlbnNvciBzdHJ1Y3R1cmUKICAgIHBvb2xpbmcgPSBOb25lLCAjIG5vdCB1c2luZyB0aGlzIGZlYXR1cmUKICAgIGNsYXNzZXMgPSAxMDAwLCAjIGRlZmF1bHQKICAgIGNsYXNzaWZpZXJfYWN0aXZhdGlvbiA9ICdzb2Z0bWF4JyAjc3BlY2lmeSBhY3RpdmF0aW9uIGZ1bmN0aW9uIG9mIG91dHB1dCBsYXllcgopICAgCmBgYAoKVE9ETzogRXhwbGFpbiB0aGlzIGxpbmUtYnktbGluZQoKIyMjIFNlY3Rpb24gMy4yIC0gQ3VzdG9taXplZCBPdXRwdXQgTGF5ZXJzCgpgYGB7cHl0aG9ufQpmaW5hbF9sYXllciA9IG1vZGVsLmxheWVyc1stMl0ub3V0cHV0CgpvdXRwdXRfbGF5ZXIgPSB0Zi5rZXJhcy5sYXllcnMuRGVuc2UoNzIsYWN0aXZhdGlvbj0ncmVsdScpKGZpbmFsX2xheWVyKQpvdXRwdXRfbGF5ZXIgPSB0Zi5rZXJhcy5sYXllcnMuRGVuc2UoMzYsYWN0aXZhdGlvbj0ncmVsdScpKGZpbmFsX2xheWVyKQpvdXRwdXRfbGF5ZXIgPSB0Zi5rZXJhcy5sYXllcnMuRGVuc2UoNixhY3RpdmF0aW9uPSdzb2Z0bWF4JykoZmluYWxfbGF5ZXIpCgojIGFkZCBpdCBiYWNrIHRvIG1vZGVsCm1vZGVsID0gdGYua2VyYXMuTW9kZWwoaW5wdXRzID0gbW9kZWwubGF5ZXJzWzBdLmlucHV0LG91dHB1dHMgPSBvdXRwdXRfbGF5ZXIpCgpgYGAKClRPRE86CgojIyBTZWN0aW9uIDQgLSBSZXN1bHRzICYgQ29tcGFyaXNvbiB3aXRoIFByZXZpb3VzIE1ldGhvZHMKClRPRE8K</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ2hhbGxlbmdlIDMgLSBDbGFzc2lmaWNhdGlvbiB3aXRoIE5ldXJhbCBOZXR3b3JrcyIKYXV0aG9yOiAiU2FoaWwgR2lsbCwgTHVrZSBJbmdyYW0iCnN1YnRpdGxlOiAiTUFUSCAzMTggLSBXaW50ZXIgMjAyMyIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CmxpYnJhcnkoInJldGljdWxhdGUiKQpTeXMuc2V0ZW52KFJFVElDVUxBVEVfUFlUSE9OID0gIi4uL3ZlbnYvYmluL3B5dGhvbjMiKSAjIFNldCBweXRob24gZW52CmBgYAoKYGBge3B5dGhvbn0KaW1wb3J0IGN2MiAKaW1wb3J0IHRlbnNvcmZsb3cgYXMgdGYKaW1wb3J0IHBhbmRhcyBhcyBwZCAKaW1wb3J0IG51bXB5IGFzIG5wIAppbXBvcnQgbWF0cGxvdGxpYi5weXBsb3QgYXMgcGx0CmZyb20gc2tsZWFybi5tb2RlbF9zZWxlY3Rpb24gaW1wb3J0IHRyYWluX3Rlc3Rfc3BsaXQKaW1wb3J0IG9zCmBgYAoKIyMgU2VjdGlvbiAxIC0gV2h5IE5ldXJhbCBOZXRzPwoKVE9ETyBBRFZBTlRBR0VTIE9GIE5FVVJBTCBORVRTCgojIyBTZWN0aW9uIDIgLSBUaGUgQXJjaGl0ZWN0dXJlCgojIyMgU2VjdGlvbiAyLjEgLSBNb2JpbGVOZXRWMgoKIyMjIFNlY3Rpb24gMi4yIC0gVHJhbnNmZXIgTGVhcm5pbmcKCiMjIFNlY3Rpb24gMyAtIE1vYmlsZU5ldFYyIGluIEFjdGlvbgoKQmVmb3JlIHdlIGJlZ2luLCB3ZSBuZWVkIHRvIGxvYWQgJiBub3JtYWxpemUgb3VyIGRhdGEuCgpgYGB7cHl0aG9ufQojTG9hZCBkYXRhIApkaXJOYW1lID0gIi4uL3NyYy9kYXRhL2FyY2hpdmUvemVyby1pbmRleGVkLWZpbGVzLnR4dCIKaW1nUGF0aCA9ICIuLi9zcmMvZGF0YS9hcmNoaXZlL0dhcmJhZ2VfY2xhc3NpZmljYXRpb24vbG9hZC8iCgpkZiA9IHBkLnJlYWRfY3N2KGRpck5hbWUsc2VwPScgJykKCmRmWydpbWFnZSddID0gaW1nUGF0aCArIGRmWydpbWFnZSddLmFzdHlwZShzdHIpCmRmWydpbWFnZSddID0gZGZbJ2ltYWdlJ10uYXBwbHkobGFtYmRhIHg6IGN2Mi5yZXNpemUoY3YyLmltcmVhZCh4KSwoMjI0LDIyNCkpKQpwcmludChkZi5oZWFkKCkpICNERUJVRwoKdHJhaW5fWCx0ZXN0X1gsdHJhaW5fWSx0ZXN0X1kgPSB0cmFpbl90ZXN0X3NwbGl0KGRmWydpbWFnZSddLGRmWydjbGFzcyddLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdGVzdF9zaXplPTAuMjAscmFuZG9tX3N0YXRlPTQyLHN0cmF0aWZ5PWRmWydjbGFzcyddKQoKCnRyYWluX1gsdmFsX1gsdmFsX1gsdmFsX1kgPSB0cmFpbl90ZXN0X3NwbGl0KHRyYWluX1gsdHJhaW5fWSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0ZXN0X3NpemU9MC4yMCxyYW5kb21fc3RhdGU9NDIsc3RyYXRpZnk9dHJhaW5fWSkKCiMgTm9ybWFsaXplIGRhdGEgCnRyYWluX1ggPSB0cmFpbl9YLzI1NS4wIAp0ZXN0X1ggPSB0ZXN0X1gvMjU1LjAKdmFsX1ggPSB2YWxfWC8yNTUuMApgYGAKCiMjIyBTZWN0aW9uIDMuMSAtIEluaXRpYWxpemluZyBNb2JpbE5ldFYyCgpgYGB7cHl0aG9ufQojRmV0Y2ggbmV0d29yayBmcm9tIGtlcmFzLCAmIGRlZmluZSBjdXN0b20gcGFyYW1zLiAKIyBUaGlzIGlzIGEgcHJlLXRyYWluZWQgbW9kZWwsYmJ1dCB3ZSByZW1vdmUgdGhlIGxhc3QgbGF5ZXIgCiMgJiB0cmFpbiBpdCBvdXJzZWx2ZXMgdG8gZml0IG91dCBwcm9ibGVtCm1vZGVsID0gdGYua2VyYXMuYXBwbGljYXRpb25zLm1vYmlsZW5ldF92Mi5Nb2JpbGVOZXRWMigKICAgIGlucHV0X3NoYXBlID0gTm9uZSwgCiAgICBhbHBoYSA9IDEuMCwgIyB1c2luZyBkZWZhdWx0IGlucHV0IHdpZHRoCiAgICBpbmNsdWRlX3RvcCA9IFRydWUsICNpbmNsdWRlIGZ1bGx5LWNvbm5lY3RlZCBpbnB1dCBsYXllcgogICAgd2VpZ2h0cyA9ICdpbWFnZW5ldCcsICMgRGVmYXVsdCB3ZWlnaHRzCiAgICBpbnB1dF90ZW5zb3IgPSBOb25lLCAjIHVzaW5nIGRlZnVhbHQgaW5wdXQgdGVuc29yIHN0cnVjdHVyZQogICAgcG9vbGluZyA9IE5vbmUsICMgbm90IHVzaW5nIHRoaXMgZmVhdHVyZQogICAgY2xhc3NlcyA9IDEwMDAsICMgZGVmYXVsdAogICAgY2xhc3NpZmllcl9hY3RpdmF0aW9uID0gJ3NvZnRtYXgnICNzcGVjaWZ5IGFjdGl2YXRpb24gZnVuY3Rpb24gb2Ygb3V0cHV0IGxheWVyCikgICAKCiMgTWFrZSBzdXJlIGV4c2l0aW5nIGxheWVycyAoY29udm9sdXRpb25hcnkgJiBwb29saW5nKSByZW1haW4gdW50b3VjaGVkCmZvciBsYXllciBpbiBtb2RlbC5sYXllcnM6IAogICAgbGF5ZXIudHJhaW5hYmxlID0gRmFsc2UgCmBgYAoKVE9ETzogRXhwbGFpbiB0aGlzIGxpbmUtYnktbGluZQoKIyMjIFNlY3Rpb24gMy4yIC0gQ3VzdG9taXplZCBPdXRwdXQgTGF5ZXJzCgpUT0RPOiBFeHBsYWluIHRoZSB0cmFuc2ZlciBsZWFybmluZyBzdGVwICYgd2h5IHdlIGFyZSB1c2luZyB0aGlzIG1hbnkgbGF5ZXJzCgpgYGB7cHl0aG9ufQpmaW5hbF9sYXllciA9IG1vZGVsLmxheWVyc1stMl0ub3V0cHV0CgpvdXRwdXRfbGF5ZXIgPSB0Zi5rZXJhcy5sYXllcnMuRGVuc2UoMTQ0LGFjdGl2YXRpb249J3JlbHUnKShmaW5hbF9sYXllcikKb3V0cHV0X2xheWVyID0gdGYua2VyYXMubGF5ZXJzLkRlbnNlKDcyLGFjdGl2YXRpb249J3JlbHUnKShmaW5hbF9sYXllcikKb3V0cHV0X2xheWVyID0gdGYua2VyYXMubGF5ZXJzLkRlbnNlKDYsYWN0aXZhdGlvbj0nc29mdG1heCcpKGZpbmFsX2xheWVyKQoKIyBhZGQgaXQgYmFjayB0byBtb2RlbAptb2RlbCA9IHRmLmtlcmFzLk1vZGVsKGlucHV0cyA9IG1vZGVsLmxheWVyc1swXS5pbnB1dCxvdXRwdXRzID0gb3V0cHV0X2xheWVyKQoKIyBDb21waWxlIGZpbmFsIG1vZGVsCm1vZGVsLmNvbXBpbGUoCiAgICBsb3NzPSdzcGFyc2VfY2F0ZWdvcmljYWxfY3Jvc3NlbnRyb3B5JywKICAgIG9wdGltaXplcj0nU0dEJywgIyBTdG9jaGFzdGljLSBHcmFkaWVudCAtIERlc2NlbnQKICAgIG1ldHJpY3MgPSBbJ2FjY3VyYWN5J10KKQoKYGBgCgojIyMgU2VjdGlvbiAzLjMgLSBUcmFpbmluZyB0aGUgTW9kZWwKClRPRE86IGV4cGxhaW4gc3RvY2hhc3RpYyBncmFkaWVudCBkZXNjZW50CgpgYGB7cHl0aG9ufQojIENvbnZlcnQgdG8gZmxvYXQgZm9yIHRlbnNvciBjb252ZXJzaW9uIAp0cmFpbl9YID0gbnAuYXNhcnJheShsaXN0KHRyYWluX1gpLGR0eXBlPSdmbG9hdDMyJykKdGVzdF9YID0gbnAuYXNhcnJheShsaXN0KHRlc3RfWCksZHR5cGU9J2Zsb2F0MzInKQp2YWxfWCA9IG5wLmFzYXJyYXkobGlzdCh2YWxfWCksZHR5cGU9J2Zsb2F0MzInKQoKCnRyYWluaW5nX2hpc3RvcnkgPSBtb2RlbC5maXQodHJhaW5fWCx0cmFpbl9ZLGVwb2NocyA9IDMwLHZhbGlkYXRpb25fZGF0YT0odmFsX1gsdmFsX1kpKQoKcGx0LmNsZigpCnBsdC5yYygnYXhlcycsIGF4aXNiZWxvdz1UcnVlKQpwbHQuZ3JpZChsaW5lc3R5bGU9J2RvdHRlZCcpCnBsdC5wbG90KHRyYWluaW5nX2hpc3RvcnlbJ2FjY3VyYWN5J10sbGFiZWw9J2FjY3VyYWN5JykKcGx0LnBsb3QodHJhaW5pbmdfaGlzdG9yeVsndmFsX2FjY3VyYWN5J10sbGFiZWwgPSAndmFsX2FjY3VyYWN5J10gCl8gPSBwbHQueGxhYmVsKCdFcG9jaCcpCl8gPSBwbHQueWxhYmVsKCdBY2N1cmFjeScpCl8gPSBwbHQudGl0bGUoJ1RyYWluaW5nICYgVmFsaWRhdGlvbiBBY2N1cmFjeSBEdXJpbmcgVHJhaW5pbmcnKQoKcGx0LnNob3coKQoKCm1vZGVsLmV2YWx1YXRlKHRlc3RfWCx0ZXN0X1kpIAoKYGBgCgojIyBTZWN0aW9uIDQgLSBSZXN1bHRzICYgQ29tcGFyaXNvbiB3aXRoIFByZXZpb3VzIE1ldGhvZHMKClRPRE86IGxvYWQgYSBmZXcgY2xhc3NpZmllZCByZXN1bHRzICYgZGlzcGxheQo=</div>
 
 
 

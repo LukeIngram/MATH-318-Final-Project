@@ -5,13 +5,30 @@ subtitle: "MATH 318 - Winter 2023"
 output: html_notebook
 ---
 
+```{r}
+library("reticulate")
+Sys.setenv(RETICULATE_PYTHON = "../venv/bin/python3") # Set python env
+```
+
+```{python}
+import cv2 
+import tensorflow as tf
+import pandas as pd 
+import numpy as np 
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+import os
+```
+
 ## Section 1 - Why Neural Nets?
 
 TODO ADVANTAGES OF NEURAL NETS
 
 ## Section 2 - The Architecture
 
-### Section 2.1 - 
+### Section 2.1 - MobileNetV2
+
+### Section 2.2 - Transfer Learning
 
 ## Section 3 - MobileNetV2 in Action
 
@@ -32,17 +49,21 @@ train_X,test_X,train_Y,test_Y = train_test_split(df['image'],df['class'],
                                                  test_size=0.20,random_state=42,stratify=df['class'])
 
 
-train_X,val_X,train_Y,val_Y = train_test_split(train_X,train_Y,
+train_X,val_X,val_X,val_Y = train_test_split(train_X,train_Y,
                                                test_size=0.20,random_state=42,stratify=train_Y)
 
-
+# Normalize data 
+train_X = train_X/255.0 
+test_X = test_X/255.0
+val_X = val_X/255.0
 ```
 
-### Section 3.1 - Initializing MobileNetV2
+### Section 3.1 - Initializing MobilNetV2
 
 ```{python}
-# Fetch network from keras, & define custom params. 
-# This is a pre-trained model,bbut we remove the last layer & train it ourselves to fit out problem
+#Fetch network from keras, & define custom params. 
+# This is a pre-trained model,bbut we remove the last layer 
+# & train it ourselves to fit out problem
 model = tf.keras.applications.mobilenet_v2.MobileNetV2(
     input_shape = None, 
     alpha = 1.0, # using default input width
@@ -53,26 +74,66 @@ model = tf.keras.applications.mobilenet_v2.MobileNetV2(
     classes = 1000, # default
     classifier_activation = 'softmax' #specify activation function of output layer
 )   
+
+# Make sure exsiting layers (convolutionary & pooling) remain untouched
+for layer in model.layers: 
+    layer.trainable = False 
 ```
 
 TODO: Explain this line-by-line
 
 ### Section 3.2 - Customized Output Layers
 
+TODO: Explain the transfer learning step & why we are using this many layers
+
 ```{python}
 final_layer = model.layers[-2].output
 
+output_layer = tf.keras.layers.Dense(144,activation='relu')(final_layer)
 output_layer = tf.keras.layers.Dense(72,activation='relu')(final_layer)
-output_layer = tf.keras.layers.Dense(36,activation='relu')(final_layer)
 output_layer = tf.keras.layers.Dense(6,activation='softmax')(final_layer)
 
 # add it back to model
 model = tf.keras.Model(inputs = model.layers[0].input,outputs = output_layer)
 
+# Compile final model
+model.compile(
+    loss='sparse_categorical_crossentropy',
+    optimizer='SGD', # Stochastic- Gradient - Descent
+    metrics = ['accuracy']
+)
+
 ```
 
-TODO:
+### Section 3.3 - Training the Model
+
+TODO: explain stochastic gradient descent
+
+```{python}
+# Convert to float for tensor conversion 
+train_X = np.asarray(list(train_X),dtype='float32')
+test_X = np.asarray(list(test_X),dtype='float32')
+val_X = np.asarray(list(val_X),dtype='float32')
+
+
+training_history = model.fit(train_X,train_Y,epochs = 30,validation_data=(val_X,val_Y))
+
+plt.clf()
+plt.rc('axes', axisbelow=True)
+plt.grid(linestyle='dotted')
+plt.plot(training_history['accuracy'],label='accuracy')
+plt.plot(training_history['val_accuracy'],label = 'val_accuracy'] 
+_ = plt.xlabel('Epoch')
+_ = plt.ylabel('Accuracy')
+_ = plt.title('Training & Validation Accuracy During Training')
+
+plt.show()
+
+
+model.evaluate(test_X,test_Y) 
+
+```
 
 ## Section 4 - Results & Comparison with Previous Methods
 
-TODO
+TODO: load a few classified results & display
