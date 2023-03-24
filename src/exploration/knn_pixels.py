@@ -24,7 +24,8 @@ def crossValidate(X,Y,folds=10,kmax = 10):
         cv = cross_val_score(knn,X,Y,cv=folds,scoring="accuracy")
         kscores.append(cv.mean())
     
-    plt.plot(list(range(1,kmax)),kscores)  
+    plt.plot(list(range(1,kmax)),kscores,'bx-')  
+    plt.xticks(np.arrange(1,kmax)+1,1.0)
     plt.savefig("Optimal_neighbors_pixel.png")
     plt.show()
 
@@ -46,7 +47,7 @@ def main():
     print(df.head()) #DEBUG
 
     
-    X_train,X_test,Y_train,Y_train = train_test_split(np.array([X_data[:,i] for i in range(X_data.shape[1])]).T,df['class'],
+    X_train,X_test,Y_train,Y_test = train_test_split(np.array([X_data[:,i] for i in range(X_data.shape[1])]).T,df['class'],
                                                      test_size=0.20,random_state=42,stratify=df['class'])
     
     # Reduce down to 95% explained variance
@@ -59,12 +60,13 @@ def main():
     Xs_train_reduced = pca.transform(Xs_train) 
     Xs_test_reduced = pca.transform(Xs_test)
     
-    print(pca.explained_variance_)
+    print(sum(pca.explained_variance_ratio_))
 
     print(f"Dimensions of data after PCA: {Xs_train_reduced.shape}") 
 
     # find optimal neighbors
-    crossValidate(Xs_train_reduced,Y_train,kmax=15)
+    crossValidate(Xs_train_reduced,Y_train,kmax=500)
+    
 
     #knn = KNeighborsClassifier()
 
