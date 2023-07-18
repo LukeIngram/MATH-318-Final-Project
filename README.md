@@ -6,7 +6,7 @@ The motivation behind this project is to contribute to the need for automated sy
 
 ## The Dataset 
 
-This project uses the [Garbage Classification Dataset](https://www.kaggle.com/datasets/asdasdasasdas/garbage-classification), which contains 2527 images of cardboard, glass, metal, plastic, and trash(non-recyclable waste). <br> 
+This project uses the [Garbage Classification Dataset](https://www.kaggle.com/datasets/asdasdasasdas/garbage-classification), which contains 2527 images of cardboard, glass, metal, plastic, and trash (non-recyclable waste). <br> 
 
 **Examples**: 
 
